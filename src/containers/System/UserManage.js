@@ -53,7 +53,7 @@ class UserManage extends Component {
     createNewUser = async (data) => {
         try {
             let response = await createNewUserService(data)
-            if (response && response.errCode != 0) {
+            if (response && response.errCode !== 0) {
                 alert(response.message)
             } else {
                 await this.getAllUsersFromReact()
