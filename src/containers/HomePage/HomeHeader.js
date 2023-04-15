@@ -3,17 +3,41 @@ import { connect } from 'react-redux';
 import './HomeHeader.scss';
 import { FormattedMessage } from 'react-intl';
 import { LANGUAGES } from '../../utils'
-
 import { changeLanguageApp } from '../../store/actions';
-
 import bannerImg from '../../assets/banner/banner.jpg';
-
+import stand from '../../assets/stand.png';
 import Slider from "react-slick";
+import * as actions from '../../store/actions';
+import { withRouter } from 'react-router';
 
 class HomeHeader extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            arrCategories: []
+        }
+    }
+
+    componentDidMount() {
+        this.props.fetchCategoryHome();
+    }
+
+    componentDidUpdate(prevProps, prevState, snaphot) {
+        if (prevProps.categoriesHome !== this.props.categoriesHome) {
+            this.setState({
+                arrCategories: this.props.categoriesHome
+            })
+        }
+    }
+
     changeLanguage = (language) => {
-        this.props.changeLanguageAppRedux(language)
+        this.props.changeLanguageAppRedux(language);
+    }
+    returnToHome = () => {
+        if (this.props.history) {
+            this.props.history.push(`/home`);
+        }
     }
 
     render() {
@@ -24,13 +48,14 @@ class HomeHeader extends Component {
             speed: 500,
             slidesToShow: 3,
             slidesToScroll: 1
-        }
+        };
+        let { arrCategories } = this.state;
         return (
             <React.Fragment>
                 <div className='home-header-container'>
                     <div className='home-header-content'>
                         <div className='left-content'>
-                            <div className='header-logo'></div>
+                            <div className='header-logo' onClick={() => this.returnToHome()}></div>
                         </div>
                         <div className='center-content'>
                             <div className='header-search'>
@@ -52,41 +77,56 @@ class HomeHeader extends Component {
                     </div>
                     <div className='home-header-nav'>
                         <div className='nav'>
-                            <a href='#home'><FormattedMessage id="home-header.home" /></a>
-                            <a href='#home'><FormattedMessage id="home-header.product" /></a>
-                            <a href='#home'><FormattedMessage id="home-header.about" /></a>
-                            <a href='#home'><FormattedMessage id="home-header.review" /></a>
-                            <a href='#home'><FormattedMessage id="home-header.contact" /></a>
+                            <a href='#home' className='nav-item'><FormattedMessage id="home-header.home" /></a>
+                            <div className='nav-item'>
+                                <FormattedMessage id="home-header.product" />
+                                <i className="fas fa-caret-down"></i>
+                                <div className='subnav'>
+                                    {arrCategories && arrCategories.length > 0
+                                        && arrCategories.map((item, index) => {
+                                            return (
+                                                <a key={index} href='#1' className='subnav-item'>{item.categoryName}</a>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </div>
+                            <a href='#home' className='nav-item'><FormattedMessage id="home-header.about" /></a>
+                            <a href='#home' className='nav-item'><FormattedMessage id="home-header.review" /></a>
+                            <a href='#home' className='nav-item'><FormattedMessage id="home-header.contact" /></a>
                         </div>
                     </div>
                 </div>
-                <div className='home-header-banner'>
-                    <div className='home-header-banner-content'>
-                        <div className='content-left'>
-                            <h3><FormattedMessage id="banner.title" /></h3>
-                            <p><FormattedMessage id="banner.desc" /></p>
-                            <a href='#' className='btn'><FormattedMessage id="banner.button" /></a>
-                        </div>
-                        <div className='content-right'>
-                            <div className='slider'>
-                                <Slider {...settings}>
-                                    <div className='slider-item'>
-                                        <img src={bannerImg} />
-                                    </div>
-                                    <div className='slider-item'>
-                                        <img src={bannerImg} />
-                                    </div>
-                                    <div className='slider-item'>
-                                        <img src={bannerImg} />
-                                    </div>
-                                    <div className='slider-item'>
-                                        <img src={bannerImg} />
-                                    </div>
-                                </Slider>
+                {this.props.isShowBanner === true &&
+                    <div className='home-header-banner'>
+                        <div className='home-header-banner-content'>
+                            <div className='content-left'>
+                                <h3><FormattedMessage id="banner.title" /></h3>
+                                <p><FormattedMessage id="banner.desc" /></p>
+                                <a href='#' className='btn'><FormattedMessage id="banner.button" /></a>
+                            </div>
+                            <div className='content-right'>
+                                <div className='slider'>
+                                    <Slider {...settings}>
+                                        <div className='slider-item'>
+                                            <img src={bannerImg} />
+                                        </div>
+                                        <div className='slider-item'>
+                                            <img src={bannerImg} />
+                                        </div>
+                                        <div className='slider-item'>
+                                            <img src={bannerImg} />
+                                        </div>
+                                        <div className='slider-item'>
+                                            <img src={bannerImg} />
+                                        </div>
+                                    </Slider>
+                                </div>
+                                <img src={stand} className='stand' />
                             </div>
                         </div>
                     </div>
-                </div>
+                }
             </React.Fragment >
         );
     }
@@ -97,14 +137,16 @@ const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
         userInfo: state.user.userInfo,
-        language: state.app.language
+        language: state.app.language,
+        categoriesHome: state.category.categoriesHome,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
+        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
+        fetchCategoryHome: () => dispatch(actions.fetchCategoryHome()),
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeHeader));

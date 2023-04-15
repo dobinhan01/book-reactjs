@@ -2,10 +2,6 @@ import actionTypes from './actionTypes';
 import { createNewUserService, getAllCodeService, getAllUsers, deleteUserService, editUserService } from '../../services/userService';
 import { toast } from 'react-toastify';
 
-// export const fetchGenderStart = () => ({
-//     type: actionTypes.FETCH_GENDER_START
-// })
-
 export const fetchGenderStart = () => {
     return async (dispatch, getState) => {
         try {

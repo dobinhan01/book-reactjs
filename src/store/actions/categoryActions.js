@@ -1,5 +1,8 @@
 import actionTypes from './actionTypes';
-import { createNewCategoryService, getAllCategories, deleteCategoryService, editCategoryService } from '../../services/categoryService';
+import {
+    createNewCategoryService, getAllCategories,
+    deleteCategoryService, editCategoryService, getCategoryHome
+} from '../../services/categoryService';
 import { toast } from 'react-toastify';
 
 export const createNewCategory = (data) => {
@@ -9,8 +12,9 @@ export const createNewCategory = (data) => {
             if (res && res.errCode === 0) {
                 toast.success("Create a new category succeed!");
                 dispatch(saveCategorySuccess());
-                dispatch(fetchAllCategoriesStart());
+                dispatch(fetchAllCategories());
             } else {
+                alert(res.errMessage)
                 dispatch(saveCategoryFailed());
             }
         } catch (e) {
@@ -28,10 +32,10 @@ export const saveCategoryFailed = () => ({
     type: actionTypes.CREATE_CATEGORY_FAILDED
 })
 
-export const fetchAllCategoriesStart = () => {
+export const fetchAllCategories = () => {
     return async (dispatch, getState) => {
         try {
-            let res = await getAllCategories('ALL');
+            let res = await getAllCategories();
             if (res && res.errCode === 0) {
                 dispatch(fetchAllCategoriesSuccess(res.categories.reverse()));
             } else {
@@ -60,7 +64,7 @@ export const deleteACategory = (id) => {
             if (res && res.errCode === 0) {
                 toast.success('Delete the category successed!')
                 dispatch(deleteCategorySuccess());
-                dispatch(fetchAllCategoriesStart());
+                dispatch(fetchAllCategories());
             } else {
                 dispatch(deleteCategoryFailed());
             }
@@ -86,7 +90,7 @@ export const editACategory = (data) => {
             if (res && res.errCode === 0) {
                 toast.success('Update the category successed!')
                 dispatch(editCategorySuccess());
-                dispatch(fetchAllCategoriesStart());
+                dispatch(fetchAllCategories());
             } else {
                 dispatch(editCategoryFailed());
             }
@@ -103,4 +107,29 @@ export const editCategorySuccess = () => ({
 
 export const editCategoryFailed = () => ({
     type: actionTypes.EDIT_CATEGORY_FAILDED
+})
+
+export const fetchCategoryHome = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getCategoryHome('');
+            if (res && res.errCode === 0) {
+                dispatch(fetchCategoriesHomeSuccess(res.data));
+            } else {
+                dispatch(fetchCategoriesHomeFailed());
+            }
+        } catch (e) {
+            dispatch(fetchCategoriesHomeFailed());
+            console.log(e)
+        }
+    }
+}
+
+export const fetchCategoriesHomeSuccess = (data) => ({
+    type: actionTypes.FETCH_ALL_CATEGORIES_HOME_SUCCESS,
+    dataCategories: data
+})
+
+export const fetchCategoriesHomeFailed = () => ({
+    type: actionTypes.FETCH_ALL_CATEGORIES_HOME_FAILDED
 })

@@ -2,6 +2,7 @@ import actionTypes from '../actions/actionTypes';
 
 const initialState = {
     categories: [],
+    categoriesHome: [],
 }
 
 const categoryReducer = (state = initialState, action) => {
@@ -14,6 +15,18 @@ const categoryReducer = (state = initialState, action) => {
 
         case actionTypes.FETCH_ALL_CATEGORIES_FAILDED:
             state.categories = [];
+            return {
+                ...state
+            }
+
+        case actionTypes.FETCH_ALL_CATEGORIES_HOME_SUCCESS:
+            state.categoriesHome = action.dataCategories;
+            return {
+                ...state
+            }
+
+        case actionTypes.FETCH_ALL_CATEGORIES_HOME_FAILDED:
+            state.categoriesHome = [];
             return {
                 ...state
             }

@@ -1,0 +1,26 @@
+.book-container {
+    .book-content {
+        border: 1px solid #04AA6D;
+        border-radius: 5px;
+
+        .book-heading {
+            background-color: #04AA6D;
+            padding: 16px 18px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 3px;
+            border: 1px solid #04AA6D;
+        }
+
+        label {
+            font-size: 14px;
+            margin: 8px 0;
+        }
+
+        .btn-primary {
+            background-color: #27ae60;
+            border: none;
+        }
+    }
+}

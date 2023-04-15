@@ -45,3 +45,14 @@ export const adminMenu = [
         ]
     },
 ];
+
+export const userMenu = [
+    { //quản lý người dùng
+        name: 'menu.admin.manage-user',
+        menus: [
+            {
+                name: 'menu.admin.crud', link: '/system/user-manage'
+            },
+        ]
+    },
+];

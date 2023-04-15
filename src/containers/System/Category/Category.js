@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
+import { CRUD_ACTIONS } from '../../../utils';
 import * as actions from '../../../store/actions';
 import './Category.scss';
 
@@ -10,8 +10,8 @@ class Category extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            listCategories: [],
             categoryName: '',
-            categories: [],
             action: '',
             categoryEditId: '',
         }
@@ -19,14 +19,13 @@ class Category extends Component {
 
     async componentDidMount() {
         this.props.fetchAllCategories();
-        // this.props.getRoleStart();
     }
 
     componentDidUpdate(prevProps, prevState, snaphot) {
 
         if (prevProps.categories !== this.props.categories) {
             this.setState({
-                categories: this.props.categories,
+                listCategories: this.props.categories,
             })
         }
         prevState.categoryName = '';
@@ -61,32 +60,6 @@ class Category extends Component {
             ...copyState
         })
     }
-
-    handleEditUserFromParent = (user) => {
-
-        // let imageBase64 = '';
-        // if (user.image) {
-        //     imageBase64 = new Buffer(user.image, 'base64').toString('binary');
-        // }
-
-        // this.setState({
-        //     email: user.email,
-        //     password: 'HARDCODE',
-        //     firstName: user.firstName,
-        //     lastName: user.lastName,
-        //     phoneNumber: user.phonenumber,
-        //     address: user.address,
-        //     gender: user.gender,
-        //     role: user.roleId,
-        //     avatar: '',
-        //     previewImgURl: imageBase64,
-        //     action: CRUD_ACTIONS.EDIT,
-        //     userEditId: user.id
-        // }, () => {
-        //     console.log('dobinhan', this.state)
-        // })
-        // // console.log('ansasx', user)
-    }
     handleEditCategory = (category) => {
         this.setState({
             categoryName: category.categoryName,
@@ -101,24 +74,22 @@ class Category extends Component {
 
     render() {
         let { categoryName } = this.state;
-        let arrCategories = this.state.categories;
+        let arrCategories = this.state.listCategories;
         return (
             <div className="category-container">
-                <div className="title mb-5">
-                    <h1>Danh mục sản phẩm</h1>
-                </div>
+                <div className="title my-5">Manage Category</div>
                 <div className='container'>
                     <div className="row">
                         <div className="col-5">
-                            <div className="category category-left">
+                            <div className="category">
                                 <div className="category-heading">
-                                    Thêm danh mục
+                                    Add category
                                 </div>
                                 <div className="category-body">
                                     <div>
                                         <div className="form-group">
-                                            <label>Tên danh mục:</label>
-                                            <input type="text" className="form-control fs-4 p-2" placeholder="Tên danh mục..."
+                                            <label>Category name:</label>
+                                            <input type="text" className="form-control fs-4 p-2"
                                                 value={categoryName}
                                                 onChange={(event) => this.onChangeInput(event, 'categoryName')}
                                             />
@@ -127,7 +98,7 @@ class Category extends Component {
                                             <button className={this.state.action === CRUD_ACTIONS.EDIT ? 'btn btn-warning mt-5 fs-4' : 'btn btn-primary mt-5 fs-4'}
                                                 onClick={() => this.handleSaveCategory()}
                                             >
-                                                {this.state.action === CRUD_ACTIONS.EDIT ? 'Lưu thay đổi' : 'Them moi'}
+                                                {this.state.action === CRUD_ACTIONS.EDIT ? 'Save changes' : 'Save category'}
                                             </button>
                                         </div>
                                     </div>
@@ -135,14 +106,14 @@ class Category extends Component {
                             </div>
                         </div>
                         <div className="col-7">
-                            <div className="category category-left">
-                                <div className="category-heading">Danh sách danh mục</div>
+                            <div className="category">
+                                <div className="category-heading">List categories</div>
                                 <div className="category-body">
                                     <table className="table">
                                         <tbody>
                                             <tr className="bg-primary">
-                                                <th>Tên danh mục</th>
-                                                <th>Tùy chọn</th>
+                                                <th>Category name</th>
+                                                <th>Actions</th>
                                             </tr>
                                             {arrCategories && arrCategories.length > 0 &&
                                                 arrCategories.map((item, index) => {
@@ -158,7 +129,6 @@ class Category extends Component {
                                                                 ><i className='fas fa-trash'></i></button>
                                                             </td>
                                                         </tr>
-
                                                     )
                                                 })
                                             }
@@ -179,23 +149,16 @@ class Category extends Component {
 
 const mapStateToProps = state => {
     return {
-        // language: state.app.language,
-        // genderRedux: state.admin.genders,
-        // roleRedux: state.admin.roles,
-        // isLoadingGender: state.admin.isLoadingGender,
         categories: state.category.categories
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        // getGenderStart: () => dispatch(actions.fetchGenderStart()),
-        // getRoleStart: () => dispatch(actions.fetchRoleStart()),
+        fetchAllCategories: () => dispatch(actions.fetchAllCategories()),
         createNewCategory: (data) => dispatch(actions.createNewCategory(data)),
-        fetchAllCategories: () => dispatch(actions.fetchAllCategoriesStart()),
         deleteACategory: (data) => dispatch(actions.deleteACategory(data)),
         editACategory: (data) => dispatch(actions.editACategory(data)),
-        // editAUser: (data) => dispatch(actions.editAUser(data)),
     };
 };
 

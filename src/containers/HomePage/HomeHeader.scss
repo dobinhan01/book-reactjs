@@ -22,6 +22,7 @@ html {
                 background: url(../../assets/logo.svg) center center no-repeat;
                 height: 100%;
                 width: 100%;
+                cursor: pointer;
             }
         }
 
@@ -128,16 +129,66 @@ html {
             justify-content: center;
             align-items: center;
 
-            a {
+            .nav-item {
                 font-size: 17px;
                 padding: 12px;
                 color: #fff;
                 text-decoration: none;
+                position: relative;
+                cursor: pointer;
+
+                i {
+                    margin-left: 5px;
+                }
+
+                &:hover .subnav {
+                    display: flex;
+                }
             }
 
-            a:hover {
+            .nav-item:hover {
                 background-color: #219150;
             }
+
+
+            .subnav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                display: flex;
+                flex-wrap: wrap;
+                background: #fff;
+                width: 320px;
+                border-radius: 5px;
+                border: 1px solid rgba(0, 0, 0, .15);
+                padding: 8px 0;
+                display: none;
+
+                .subnav-item {
+                    width: 45%;
+                    color: #444;
+                    margin: 0;
+                    font-size: 17px;
+                    padding: 12px;
+                    text-decoration: none;
+                    border-radius: 3px;
+                    cursor: pointer;
+
+                    &:nth-child(even) {
+                        width: 55%;
+                    }
+
+                    &:hover {
+                        color: #fff;
+                        background-color: #219150;
+                        border: 3px;
+                    }
+
+                }
+
+            }
+
+
         }
     }
 }
@@ -190,9 +241,14 @@ html {
             width: 50%;
             text-align: center;
             margin: 90px 0;
+            position: relative;
 
             .slider {
                 padding: 0 50px;
+
+                .slick-slider {
+                    z-index: 1;
+                }
 
                 .slider-item {
                     outline: none;
@@ -213,7 +269,16 @@ html {
                 .slick-arrow {
                     display: none !important;
                 }
+
             }
+
+            .stand {
+                width: 100%;
+                position: absolute;
+                top: 35%;
+                left: 0;
+            }
+
         }
     }
 }

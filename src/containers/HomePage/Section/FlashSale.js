@@ -1,14 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './FlashSale.scss';
-
 import Slider from "react-slick";
-
-import flashsaleImg from '../../../assets/flashsale.jpg';
+import * as actions from '../../../store/actions';
+import { withRouter } from 'react-router';
 
 class FlashSale extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            arrFlashSales: [],
+            listDiscounts: [],
+        }
+    }
+
+    componentDidMount() {
+        this.props.fetchFlashSaleHome();
+        this.props.fetchDiscountStart();
+    }
+
+    componentDidUpdate(prevProps, prevState, snaphot) {
+        if (prevProps.flashSales !== this.props.flashSales) {
+            this.setState({
+                arrFlashSales: this.props.flashSales,
+            })
+        }
+    }
+    handleViewDetailBook = (book) => {
+        if (this.props.history) {
+            this.props.history.push(`/detail-book/${book.id}`);
+        }
+    }
+
     render() {
+        let arrFlashSales = this.state.arrFlashSales;
+        let arrDiscounts = this.props.discounts;
         return (
             <div className='section-share section-flashsale'>
                 <div className='section-container'>
@@ -27,108 +53,59 @@ class FlashSale extends Component {
                     <div className='section-content'>
                         <div className='section-slider'>
                             <Slider {...this.props.settings}>
-                                <div className='section-slider-item'>
-                                    <div className='section-slider-sale'>
-                                        <div className='section-slider-sale-discount'>50%</div>
-                                    </div>
-                                    <div className='section-slider-img'>
-                                        <img src={flashsaleImg} />
-                                    </div>
-                                    <div className='section-slider-name'>Muốn Có Gấu, Phải Phấn Đấu Muốn Có Gấu, Phải Phấn Đấu Muốn Có Gấu, Phải Phấn Đấu</div>
-                                    <div className='section-slider-price'>
-                                        <div className='section-slider-price-new'>37.500</div>
-                                        <div className='section-slider-price-odd'>75.000</div>
-                                        <div className='section-slider-episode'>Tập 1</div>
-                                    </div>
-                                    <div className='progress'>
-                                        <div className='progress-value'>Đã bán 12</div>
-                                    </div>
-                                </div>
-                                <div className='section-slider-item'>
-                                    <div className='section-slider-sale'>
-                                        <div className='section-slider-sale-discount'>50%</div>
-                                    </div>
-                                    <div className='section-slider-img'>
-                                        <img src={flashsaleImg} />
-                                    </div>
-                                    <div className='section-slider-name'>Muốn Có Gấu, Phải Phấn Đấu2222222222222222222222222</div>
-                                    <div className='section-slider-price'>
-                                        <div className='section-slider-price-new'>37.500</div>
-                                        <div className='section-slider-price-odd'>75.000</div>
-                                        <div className='section-slider-episode'>Tập 1</div>
-                                    </div>
-                                    <div className='progress'>
-                                        <div className='progress-value'>Đã bán 12</div>
-                                    </div>
-                                </div>
-                                <div className='section-slider-item'>
-                                    <div className='section-slider-sale'>
-                                        <div className='section-slider-sale-discount'>50%</div>
-                                    </div>
-                                    <div className='section-slider-img'>
-                                        <img src={flashsaleImg} />
-                                    </div>
-                                    <div className='section-slider-name'>Muốn Có Gấu, Phải Phấn Đấu3333333333333333333333333333</div>
-                                    <div className='section-slider-price'>
-                                        <div className='section-slider-price-new'>37.500</div>
-                                        <div className='section-slider-price-odd'>75.000</div>
-                                        <div className='section-slider-episode'>Tập 1</div>
-                                    </div>
-                                    <div className='progress'>
-                                        <div className='progress-value'>Đã bán 12</div>
-                                    </div>
-                                </div>
-                                <div className='section-slider-item'>
-                                    <div className='section-slider-sale'>
-                                        <div className='section-slider-sale-discount'>50%</div>
-                                    </div>
-                                    <div className='section-slider-img'>
-                                        <img src={flashsaleImg} />
-                                    </div>
-                                    <div className='section-slider-name'>Muốn Có Gấu, Phải Phấn Đấu44444444444444444444</div>
-                                    <div className='section-slider-price'>
-                                        <div className='section-slider-price-new'>37.500</div>
-                                        <div className='section-slider-price-odd'>75.000</div>
-                                        <div className='section-slider-episode'>Tập 1</div>
-                                    </div>
-                                    <div className='progress'>
-                                        <div className='progress-value'>Đã bán 12</div>
-                                    </div>
-                                </div>
-                                <div className='section-slider-item'>
-                                    <div className='section-slider-sale'>
-                                        <div className='section-slider-sale-discount'>50%</div>
-                                    </div>
-                                    <div className='section-slider-img'>
-                                        <img src={flashsaleImg} />
-                                    </div>
-                                    <div className='section-slider-name'>Muốn Có Gấu, Phải Phấn Đấu55555555555555555555555</div>
-                                    <div className='section-slider-price'>
-                                        <div className='section-slider-price-new'>37.500</div>
-                                        <div className='section-slider-price-odd'>75.000</div>
-                                        <div className='section-slider-episode'>Tập 1</div>
-                                    </div>
-                                    <div className='progress'>
-                                        <div className='progress-value'>Đã bán 12</div>
-                                    </div>
-                                </div>
-                                <div className='section-slider-item'>
-                                    <div className='section-slider-sale'>
-                                        <div className='section-slider-sale-discount'>50%</div>
-                                    </div>
-                                    <div className='section-slider-img'>
-                                        <img src={flashsaleImg} />
-                                    </div>
-                                    <div className='section-slider-name'>Muốn Có Gấu, Phải Phấn Đấu</div>
-                                    <div className='section-slider-price'>
-                                        <div className='section-slider-price-new'>37.500</div>
-                                        <div className='section-slider-price-odd'>75.000</div>
-                                        <div className='section-slider-episode'>Tập 1</div>
-                                    </div>
-                                    <div className='progress'>
-                                        <div className='progress-value'>Đã bán 12</div>
-                                    </div>
-                                </div>
+                                {arrFlashSales && arrFlashSales.length > 0
+                                    && arrFlashSales.map((item, index) => {
+                                        let imageBase64 = '';
+                                        if (item.image) {
+                                            imageBase64 = new Buffer(item.image, 'base64').toString('binary');
+                                        }
+
+                                        let discount = '';
+                                        let priceNew = '';
+                                        if (item.discount !== 'D0') {
+                                            discount = arrDiscounts.find((index) => {
+                                                return index.key === item.discount;
+                                            })
+                                            priceNew = item.price * discount.valueEn;
+                                            return (
+                                                <div key={index} className='section-slider-item' onClick={() => this.handleViewDetailBook(item)}>
+                                                    <div className='section-slider-sale'>
+                                                        <div className='section-slider-sale-discount'>{discount.valueEn}%</div>
+                                                    </div>
+                                                    <div className='section-slider-img'>
+                                                        <img src={imageBase64} />
+                                                    </div>
+                                                    <div className='section-slider-name'>{item.name}</div>
+                                                    <div className='section-slider-price'>
+                                                        <div className='section-slider-price-new'>{priceNew}đ</div>
+                                                        <div className='section-slider-price-odd'>{item.price}đ</div>
+                                                    </div>
+                                                    <div className='section-slider-add-to-car'>
+                                                        Add to cart
+                                                        <i className="fas fa-shopping-cart"></i>
+                                                    </div>
+                                                </div>
+                                            )
+                                        } else {
+                                            return (
+                                                <div key={index} className='section-slider-item' onClick={() => this.handleViewDetailBook(item)}>
+                                                    <div className='section-slider-img'>
+                                                        <img src={imageBase64} />
+                                                    </div>
+                                                    <div className='section-slider-name'>{item.name}</div>
+                                                    <div className='section-slider-price'>
+                                                        <div className='section-slider-price-new'>{item.price}đ</div>
+                                                    </div>
+                                                    <div className='section-slider-add-to-car'>
+                                                        Add to cart
+                                                        <i className="fas fa-shopping-cart"></i>
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+                                    })
+                                }
+
                             </Slider>
                         </div>
                         <div className='section-more'>
@@ -144,13 +121,17 @@ class FlashSale extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        flashSales: state.book.flashSaleHome,
+        discounts: state.book.discounts,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        fetchFlashSaleHome: () => dispatch(actions.fetchFlashSaleHome()),
+        fetchDiscountStart: () => dispatch(actions.fetchDiscountStart()),
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FlashSale);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FlashSale));

@@ -18,15 +18,15 @@ class Login extends Component {
         }
     }
 
-    handleOnChangeUsername = (even) => {
+    handleOnChangeUsername = (event) => {
         this.setState({
-            username: even.target.value
+            username: event.target.value
         })
     }
 
-    handleOnChangePassword = (even) => {
+    handleOnChangePassword = (event) => {
         this.setState({
-            password: even.target.value
+            password: event.target.value
         })
     }
 
@@ -63,6 +63,12 @@ class Login extends Component {
         })
     }
 
+    handleKeyDown = (event) => {
+        if (event.keyCode === 13) {
+            this.handleLogin()
+        }
+    }
+
     render() {
         return (
             <div className='login-background'>
@@ -75,7 +81,7 @@ class Login extends Component {
                                 className='form-control'
                                 placeholder='Enter your username'
                                 value={this.state.username}
-                                onChange={(even) => this.handleOnChangeUsername(even)}
+                                onChange={(event) => this.handleOnChangeUsername(event)}
                             />
                         </div>
                         <div className='col-12 form-group login-input'>
@@ -84,7 +90,8 @@ class Login extends Component {
                                 <input type={this.state.isShowPassword ? 'text' : 'password'}
                                     className='form-control'
                                     placeholder='Enter your password'
-                                    onChange={(even) => this.handleOnChangePassword(even)}
+                                    onChange={(event) => this.handleOnChangePassword(event)}
+                                    onKeyDown={(event) => this.handleKeyDown(event)}
                                 />
                                 <span onClick={() => this.handleShowHidePassword()}>
                                     <i className={this.state.isShowPassword ? 'far fa-eye' : 'far fa-eye-slash'}></i>

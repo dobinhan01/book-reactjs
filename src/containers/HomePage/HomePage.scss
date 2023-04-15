@@ -2,7 +2,8 @@
     padding: 20px 9%;
 
     .section-container {
-        border: 1px solid red;
+        background-color: #fff;
+        padding-bottom: 16px;
 
         .section-header {
 
@@ -99,7 +100,6 @@
                         background: linear-gradient(18deg, #eee 60%, #fff 30.1%);
                         box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
                         position: relative;
-                        cursor: pointer;
 
                         &:hover {
                             border: 1px solid #444;
@@ -143,6 +143,10 @@
                         .section-slider-price {
                             position: relative;
                             margin-bottom: 10px;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            padding: 0 26px;
 
                             .section-slider-price-new {
                                 font-size: 18px;
@@ -155,30 +159,26 @@
                                 color: #666;
                                 text-decoration: line-through;
                             }
-
-                            .section-slider-episode {
-                                display: inline-block;
-                                padding: 3px 10px;
-                                color: #fff;
-                                background: #929292;
-                                border-radius: 5px;
-                                font-size: 14px;
-                                position: absolute;
-                                top: 0;
-                                right: 0;
-                            }
                         }
 
-                        .progress {
-                            height: 22px;
+                        .section-slider-add-to-car {
+                            height: 30px;
+                            color: #fff;
                             background-color: #27ae60;
-                            border-radius: 10px;
+                            font-size: 14px;
+                            border-radius: 15px;
+                            display: flex;
                             align-items: center;
                             justify-content: center;
+                            cursor: pointer;
 
-                            .progress-value {
-                                color: #fff;
-                                font-size: 14px;
+                            i {
+                                font-size: 18px;
+                                margin-left: 8px;
+                            }
+
+                            &:hover {
+                                background-color: #219150;
                             }
                         }
                     }
@@ -228,12 +228,16 @@
                         font-weight: 900;
                     }
                 }
+
+                .slick-disabled {
+                    display: none !important;
+                }
             }
 
             .section-more {
                 width: 100%;
                 text-align: center;
-                margin: 36px 0 26px;
+                margin-top: 20px;
 
                 .section-btn {
                     border: none;

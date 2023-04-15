@@ -1,7 +1,7 @@
 import axios from "../axios";
 
-const getAllCategories = (id) => {
-    return axios.get(`/api/get-all-categories?id=${id}`, { id: id })
+const getAllCategories = () => {
+    return axios.get('/api/get-all-categories')
 }
 
 const createNewCategoryService = (data) => {
@@ -20,6 +20,11 @@ const editCategoryService = (inputData) => {
     return axios.put('/api/edit-category', inputData)
 }
 
+const getCategoryHome = (limit) => {
+    return axios.get(`/api/category-home?limit=${limit}`)
+}
+
 export {
-    getAllCategories, createNewCategoryService, deleteCategoryService, editCategoryService
+    getAllCategories, createNewCategoryService,
+    deleteCategoryService, editCategoryService, getCategoryHome
 }

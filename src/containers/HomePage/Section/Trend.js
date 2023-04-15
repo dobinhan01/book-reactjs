@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './FlashSale.scss';
 
 import Slider from "react-slick";
 
