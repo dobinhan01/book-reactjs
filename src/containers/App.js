@@ -12,7 +12,9 @@ import System from '../routes/System';
 import { CustomToastCloseButton } from '../components/CustomToast';
 import HomePage from './HomePage/HomePage.js';
 import CustomScrollbars from '../../src/components/CustomScrollbars.js';
-import DetailBook from './Book/DetailBook';
+import DetailCart from './Customer/Cart/DetailCart';
+import DetailBook from './Customer/Book/DetailBook';
+import DetailCategory from './Customer/Book/DetailCategory';
 
 class App extends Component {
 
@@ -46,7 +48,9 @@ class App extends Component {
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     <Route path={path.HOMEPAGE} component={HomePage} />
+                                    <Route path={path.DETAIL_CART} component={DetailCart} />
                                     <Route path={path.DETAIL_BOOK} component={DetailBook} />
+                                    <Route path={path.DETAIL_CATEGORY} component={DetailCategory} />
 
                                 </Switch>
                             </CustomScrollbars>

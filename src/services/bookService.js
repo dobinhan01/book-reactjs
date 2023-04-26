@@ -32,8 +32,12 @@ const getAllCodeService = (inputType) => {
     return axios.get(`/api/allcode?type=${inputType}`)
 }
 
+const getBookByCategory = (category) => {
+    return axios.get(`/api/get-book-by-category?categoryId=${category}`)
+}
+
 export {
     getAllBooks, createNewBookService,
     deleteBookService, editBookService, getFlashSaleHome,
-    getDetaiInfoBook, getAllCodeService
+    getDetaiInfoBook, getAllCodeService, getBookByCategory
 }

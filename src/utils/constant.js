@@ -4,7 +4,9 @@ export const path = {
     LOGIN: '/login',
     LOG_OUT: '/logout',
     SYSTEM: '/system',
-    DETAIL_BOOK: '/detail-book/:id'
+    DETAIL_CART: '/cart/:id',
+    DETAIL_BOOK: '/detail-book/:id',
+    DETAIL_CATEGORY: '/detail-category/:id'
 };
 
 export const LANGUAGES = {

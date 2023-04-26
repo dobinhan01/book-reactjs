@@ -29,6 +29,7 @@ class Book extends Component {
             author: '',
             publisher: '',
             price: '',
+            priceNew: '',
             selectedDiscount: '',
             selectedCategory: '',
             image: '',
@@ -46,7 +47,7 @@ class Book extends Component {
         this.props.fetchAllCategories();
     }
 
-    buildDataInputSelectDiscount = (data) => {
+    buildDataSelectDiscount = (data) => {
         let result = [];
         if (data && data.length > 0) {
             data.map((item, index) => {
@@ -59,7 +60,7 @@ class Book extends Component {
         return result;
     }
 
-    buildDataInputSelect = (data) => {
+    buildDataISelectCategory = (data) => {
         let result = [];
         if (data && data.length > 0) {
             data.map((item, index) => {
@@ -74,13 +75,13 @@ class Book extends Component {
 
     componentDidUpdate(prevProps, prevState, snaphot) {
         if (prevProps.discounts !== this.props.discounts) {
-            let dataSelect = this.buildDataInputSelectDiscount(this.props.discounts);
+            let dataSelect = this.buildDataSelectDiscount(this.props.discounts);
             this.setState({
                 listDiscounts: dataSelect,
             })
         }
         if (prevProps.categories !== this.props.categories) {
-            let dataSelect = this.buildDataInputSelect(this.props.categories);
+            let dataSelect = this.buildDataISelectCategory(this.props.categories);
             this.setState({
                 listCategories: dataSelect,
             })
@@ -143,29 +144,48 @@ class Book extends Component {
 
         if (action === CRUD_ACTIONS.CREATE) {
             //fire redux create book
+            let arrDiscounts = this.props.discounts;
+            let discount = this.state.selectedDiscount.value;
+            let priceNew = this.state.price;
+            discount = arrDiscounts.find((item) => {
+                return item.key === discount
+            });
+            priceNew = discount.valueEn === '0' ? priceNew : priceNew * discount.valueEn / 100;
+
             this.props.createNewBook({
                 name: this.state.name,
                 author: this.state.author,
                 publisher: this.state.publisher,
-                image: this.state.image,
                 price: this.state.price,
+                priceNew: priceNew,
                 discount: this.state.selectedDiscount.value,
                 categoryId: this.state.selectedCategory.value,
+                image: this.state.image,
                 contentHTML: this.state.contentHTML,
                 contentMarkdown: this.state.contentMarkdown,
             })
         }
         if (action === CRUD_ACTIONS.EDIT) {
             //fire redux edit book
+            let arrDiscounts = this.props.discounts;
+            let discount = this.state.selectedDiscount.value;
+            let priceNew = this.state.price;
+            discount = arrDiscounts.find((item) => {
+                return item.key === this.state.selectedDiscount.value
+            });
+            priceNew = discount.valueEn === '0' ? priceNew : priceNew * discount.valueEn / 100;
+            console.log(discount.valueEn, priceNew)
+
             this.props.editABook({
                 id: this.state.bookEditId,
                 name: this.state.name,
                 author: this.state.author,
                 publisher: this.state.publisher,
-                image: this.state.image,
                 price: this.state.price,
+                priceNew: priceNew,
                 discount: this.state.selectedDiscount.value,
                 categoryId: this.state.selectedCategory.value,
+                image: this.state.image,
                 contentHTML: this.state.contentHTML,
                 contentMarkdown: this.state.contentMarkdown,
             })
@@ -194,28 +214,25 @@ class Book extends Component {
     }
 
     handleEditBookFromParent = async (book) => {
+        let { listDiscounts, listCategories } = this.state;
+
         let imageBase64 = '';
         if (book.image) {
-            imageBase64 = new Buffer(book.image, 'base64').toString('binary');
+            imageBase64 = Buffer.from(book.image, 'base64').toString('binary');
         }
-        let selectedDiscount = '';
-        if (book.discount) {
-            selectedDiscount = this.state.listDiscounts.find((item) => {
-                return item.value === book.discount
-            })
-        }
-        let selectedCategory = '';
-        if (book.categoryId) {
-            selectedCategory = this.state.listCategories.find((item) => {
-                return item.value === book.categoryId
-            })
-        }
+        let selectedDiscount = listDiscounts.find((item) => {
+            return item.value === book.discount
+        })
+        let selectedCategory = listCategories.find((item) => {
+            return item.value === book.categoryId
+        })
 
         this.setState({
             name: book.name,
             author: book.author,
             publisher: book.publisher,
             price: book.price,
+            priceNew: book.priceNew,
             selectedDiscount: selectedDiscount,
             selectedCategory: selectedCategory,
             image: '',
@@ -299,7 +316,7 @@ class Book extends Component {
                                         ></div>
                                     </div>
                                 </div>
-                                <div className=''>
+                                <div >
                                     <label>Description</label>
                                     <MdEditor
                                         style={{ height: '500px' }}

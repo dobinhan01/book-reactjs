@@ -9,6 +9,7 @@ import stand from '../../assets/stand.png';
 import Slider from "react-slick";
 import * as actions from '../../store/actions';
 import { withRouter } from 'react-router';
+import slugify from 'react-slugify';
 
 class HomeHeader extends Component {
 
@@ -34,9 +35,24 @@ class HomeHeader extends Component {
     changeLanguage = (language) => {
         this.props.changeLanguageAppRedux(language);
     }
+
     returnToHome = () => {
         if (this.props.history) {
             this.props.history.push(`/home`);
+        }
+    }
+
+    handleViewDetailCart = () => {
+        let userId = this.props.userInfo.id;
+        if (this.props.history) {
+            this.props.history.push(`/cart/${userId}`);
+        }
+    }
+
+    handleViewDetailCategory = (item) => {
+        // let slug = slugify(item.categoryName);
+        if (this.props.history) {
+            this.props.history.push(`/detail-category/${item.id}`);
         }
     }
 
@@ -71,13 +87,15 @@ class HomeHeader extends Component {
                                 <span onClick={() => this.changeLanguage(LANGUAGES.EN)}>EN</span>
                             </div>
                             <div className='language'><i className="fas fa-globe"></i></div>
-                            <div className='cart'><i className="fas fa-shopping-cart"></i></div>
+                            <div className='cart'
+                                onClick={() => this.handleViewDetailCart()}
+                            ><i className="fas fa-shopping-cart"></i></div>
                             <div className='user'><i className="fas fa-user-circle"></i></div>
                         </div>
                     </div>
                     <div className='home-header-nav'>
                         <div className='nav'>
-                            <a href='#home' className='nav-item'><FormattedMessage id="home-header.home" /></a>
+                            <div onClick={() => this.returnToHome()} className='nav-item'><FormattedMessage id="home-header.home" /></div>
                             <div className='nav-item'>
                                 <FormattedMessage id="home-header.product" />
                                 <i className="fas fa-caret-down"></i>
@@ -85,7 +103,9 @@ class HomeHeader extends Component {
                                     {arrCategories && arrCategories.length > 0
                                         && arrCategories.map((item, index) => {
                                             return (
-                                                <a key={index} href='#1' className='subnav-item'>{item.categoryName}</a>
+                                                <div key={index} className='subnav-item'
+                                                    onClick={() => this.handleViewDetailCategory(item)}
+                                                >{item.categoryName}</div>
                                             )
                                         })
                                     }

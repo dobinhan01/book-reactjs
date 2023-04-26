@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import Slider from "react-slick";
 import * as actions from '../../../store/actions';
 import { withRouter } from 'react-router';
+import NumberFormat from 'react-number-format';
+import { toast } from 'react-toastify';
+import { postAddBookToCart } from '../../../services/customerService';
 
 class FlashSale extends Component {
 
@@ -26,9 +29,24 @@ class FlashSale extends Component {
             })
         }
     }
+
     handleViewDetailBook = (book) => {
         if (this.props.history) {
             this.props.history.push(`/detail-book/${book.id}`);
+        }
+    }
+
+    handleClickAddTOCar = async (event, book) => {
+        event.stopPropagation();
+        let user = this.props.user
+        let res = await postAddBookToCart({
+            userId: user.id,
+            bookId: book.id
+        })
+        if (res && res.errCode === 0) {
+            toast.success('Add a new book to cart succeed!')
+        } else {
+            toast.error('Add a new book to cart error!')
         }
     }
 
@@ -56,53 +74,70 @@ class FlashSale extends Component {
                                 {arrFlashSales && arrFlashSales.length > 0
                                     && arrFlashSales.map((item, index) => {
                                         let imageBase64 = '';
-                                        if (item.image) {
-                                            imageBase64 = new Buffer(item.image, 'base64').toString('binary');
-                                        }
-
                                         let discount = '';
-                                        let priceNew = '';
-                                        if (item.discount !== 'D0') {
+                                        if (item.image) {
+                                            imageBase64 = Buffer.from(item.image, 'base64').toString('binary');
+                                        }
+                                        if (item.discount) {
                                             discount = arrDiscounts.find((index) => {
                                                 return index.key === item.discount;
                                             })
-                                            priceNew = item.price * discount.valueEn;
-                                            return (
-                                                <div key={index} className='section-slider-item' onClick={() => this.handleViewDetailBook(item)}>
-                                                    <div className='section-slider-sale'>
-                                                        <div className='section-slider-sale-discount'>{discount.valueEn}%</div>
-                                                    </div>
-                                                    <div className='section-slider-img'>
-                                                        <img src={imageBase64} />
-                                                    </div>
-                                                    <div className='section-slider-name'>{item.name}</div>
-                                                    <div className='section-slider-price'>
-                                                        <div className='section-slider-price-new'>{priceNew}đ</div>
-                                                        <div className='section-slider-price-odd'>{item.price}đ</div>
-                                                    </div>
-                                                    <div className='section-slider-add-to-car'>
-                                                        Add to cart
-                                                        <i className="fas fa-shopping-cart"></i>
-                                                    </div>
-                                                </div>
-                                            )
-                                        } else {
-                                            return (
-                                                <div key={index} className='section-slider-item' onClick={() => this.handleViewDetailBook(item)}>
-                                                    <div className='section-slider-img'>
-                                                        <img src={imageBase64} />
-                                                    </div>
-                                                    <div className='section-slider-name'>{item.name}</div>
-                                                    <div className='section-slider-price'>
-                                                        <div className='section-slider-price-new'>{item.price}đ</div>
-                                                    </div>
-                                                    <div className='section-slider-add-to-car'>
-                                                        Add to cart
-                                                        <i className="fas fa-shopping-cart"></i>
-                                                    </div>
-                                                </div>
-                                            )
                                         }
+                                        return (
+                                            <div key={index} className='section-slider-item' onClick={() => this.handleViewDetailBook(item)}>
+                                                {discount.valueVi !== '0' &&
+                                                    <div className='section-slider-sale'>
+                                                        <div className='section-slider-sale-discount'>
+                                                            {discount.valueVi}%
+                                                        </div>
+                                                    </div>
+                                                }
+                                                <div className='section-slider-img'>
+                                                    <img src={imageBase64} />
+                                                </div>
+                                                <div className='section-slider-name'>{item.name}</div>
+                                                {discount.valueVi !== '0' ?
+                                                    <div className='section-slider-price'>
+                                                        <div className='section-slider-price-new'>
+                                                            <NumberFormat
+                                                                value={item.priceNew}
+                                                                className="foo"
+                                                                displayType={'text'}
+                                                                thousandSeparator={true}
+                                                                suffix={'đ'}
+                                                            />
+                                                        </div>
+                                                        <div className='section-slider-price-odd'>
+                                                            <NumberFormat
+                                                                value={item.price}
+                                                                className="foo"
+                                                                displayType={'text'}
+                                                                thousandSeparator={true}
+                                                                suffix={'đ'}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    :
+                                                    <div className='section-slider-price'>
+                                                        <div className='section-slider-price-new'>
+                                                            <NumberFormat
+                                                                value={item.priceNew}
+                                                                className="foo"
+                                                                displayType={'text'}
+                                                                thousandSeparator={true}
+                                                                suffix={'đ'}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                }
+                                                <div className='section-slider-add-to-car'
+                                                    onClick={(event) => this.handleClickAddTOCar(event, item)}
+                                                >
+                                                    Add to cart
+                                                    <i className="fas fa-shopping-cart"></i>
+                                                </div>
+                                            </div>
+                                        )
                                     })
                                 }
 
@@ -121,6 +156,7 @@ class FlashSale extends Component {
 
 const mapStateToProps = state => {
     return {
+        user: state.user.userInfo,
         isLoggedIn: state.user.isLoggedIn,
         flashSales: state.book.flashSaleHome,
         discounts: state.book.discounts,

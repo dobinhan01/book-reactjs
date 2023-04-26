@@ -17,6 +17,7 @@
                 background-size: contain;
                 background-repeat: no-repeat;
                 margin: 0 auto;
+                cursor: pointer;
             }
 
             .add-book {
@@ -73,7 +74,6 @@
             .desc-book {
                 display: flex;
                 justify-content: space-between;
-                align-items: center;
                 margin-bottom: 32px;
 
                 .desc-book-left {
@@ -128,7 +128,7 @@
                 align-items: center;
 
                 span {
-                    color: #333;
+                    color: #555;
                     font-size: 16px;
                     font-weight: bold;
                 }
@@ -139,14 +139,20 @@
                     display: flex;
                     justify-content: flex-start;
                     align-items: center;
-                    height: 32px;
+                    height: 34px;
                     border-radius: 5px;
 
                     .quantity {
-                        color: #000;
+                        color: #27ae60;
                         padding: 0 16px;
-                        font-size: 18px;
+                        font-size: 20px;
                         font-weight: bold;
+                        border: none;
+                        outline: none;
+                        width: 50px;
+                        height: 100%;
+                        background-color: transparent;
+                        text-align: center;
                     }
 
                     .minus {

@@ -158,14 +158,14 @@ html {
                 display: flex;
                 flex-wrap: wrap;
                 background: #fff;
-                width: 320px;
+                width: 420px;
                 border-radius: 5px;
                 border: 1px solid rgba(0, 0, 0, .15);
                 padding: 8px 0;
                 display: none;
 
                 .subnav-item {
-                    width: 45%;
+                    width: 50%;
                     color: #444;
                     margin: 0;
                     font-size: 17px;
@@ -173,10 +173,6 @@ html {
                     text-decoration: none;
                     border-radius: 3px;
                     cursor: pointer;
-
-                    &:nth-child(even) {
-                        width: 55%;
-                    }
 
                     &:hover {
                         color: #fff;
