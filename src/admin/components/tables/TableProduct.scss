@@ -1,0 +1,62 @@
+.TableProduct {
+    width: 100%;
+    background-color: #fff;
+
+    table {
+        margin: 0;
+
+        thead {
+            tr {
+                th {
+                    padding: 16px 12px;
+                    color: rgb(47, 55, 70);
+                    background-color: rgb(248, 249, 250);
+                    font-size: 16px;
+                    font-weight: 600;
+                    line-height: 1;
+                    letter-spacing: 0.5px;
+                    text-transform: capitalize;
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                td {
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 1.57;
+                    border-bottom: 1px solid rgb(242, 244, 247);
+                    color: rgb(17, 25, 39);
+                    padding: 12px 12px;
+                }
+
+                .title {
+                    max-width: 200px;
+                }
+
+                .thumbnail {
+                    max-width: 80px;
+
+                    img {
+                        width: 100%;
+                        height: auto;
+                        border-radius: 10px;
+                    }
+                }
+
+                .author {
+                    max-width: 140px;
+                }
+
+                .publisher {
+                    max-width: 120px;
+                }
+
+                .actions {
+                    padding: 12px 0;
+                }
+            }
+        }
+    }
+}

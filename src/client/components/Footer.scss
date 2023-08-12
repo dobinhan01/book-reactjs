@@ -1,0 +1,164 @@
+.footer-container {
+    color: #cbcfd6;
+    line-height: 20px;
+    font-size: 16px;
+    font-weight: 500;
+
+    .footer-inner {
+        padding: 95px 0 85px;
+        background: #121823;
+        color: #cbcfd6;
+
+        .logo {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 28px;
+            text-decoration: none;
+            font-family: 'Teko', sans-serif;
+
+            img {
+                width: fit-content;
+                height: 100%;
+                object-fit: contain;
+            }
+
+            span {
+                padding-top: 10px;
+
+                span {
+                    color: #FF919D;
+                }
+            }
+        }
+
+        .address {
+            .item {
+                padding: 3px 0;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 16px;
+
+                i {
+                    width: 16px;
+                }
+            }
+        }
+
+        .heading {
+            h3 {
+
+                font-size: 18px;
+                font-weight: 600;
+                line-height: 1;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                margin: 0 0 40px;
+                color: #ffffff;
+                position: relative;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    width: 40px;
+                    background-color: #fff;
+                    height: 1px;
+                    bottom: -18px;
+                    left: 0;
+                }
+            }
+        }
+
+        .menu {
+            ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+
+                li {
+                    color: #cbcfd6;
+                    margin: 0 0 8px;
+                    line-height: 1.4;
+                    transition: .3s;
+
+                    &:hover {
+                        color: #fff;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .text {
+            p {
+                line-height: 25px;
+                margin: 20px 0;
+            }
+
+            .subscription {
+                padding-top: 10px;
+
+                form {
+                    position: relative;
+                    display: flex;
+
+                    input {
+                        display: inline-block;
+                        min-height: 50px;
+                        width: 100%;
+                        font-size: 14px;
+                        line-height: 1.8;
+                        padding: 6px 12px;
+                        vertical-align: middle;
+                        background-color: fff;
+                        color: #606775;
+                        border: none;
+                        border-radius: 10px;
+                        transition: .3s;
+
+                        &:focus {
+                            outline: none;
+                            border: none;
+                        }
+
+                        &::placeholder {
+                            font-style: italic;
+                        }
+                    }
+
+                    button {
+                        background-color: #f18e7d;
+                        color: #fff;
+                        height: 42px;
+                        position: absolute;
+                        top: 4px;
+                        right: 4px;
+                        border-radius: 10px;
+                        margin-left: -20px;
+                        border: none;
+                        padding: 0 15px;
+                        transition: .3s ease-in-out;
+
+                        &:hover {
+                            background-color: #121823;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .bottom {
+        background: #1d2330;
+        color: #cbcfd6;
+        font-weight: 600;
+        font-size: 14px;
+        text-align: center;
+        padding: 20px 0;
+        line-height: 1;
+    }
+}

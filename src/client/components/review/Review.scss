@@ -1,0 +1,36 @@
+.Review {
+    h3 {
+        font-weight: 700;
+        line-height: 34px;
+        font-size: 28px;
+        margin: 20px 0;
+    }
+
+    .stars {
+        i {
+            font-size: 20px;
+            color: gray;
+        }
+
+        .active {
+            color: orange;
+        }
+    }
+
+    .textarea {
+        border: 1px solid #a9a9a9;
+        border-radius: 5px;
+        width: 100%;
+        min-height: 100px;
+        padding: 10px;
+        margin: 16px 0;
+    }
+
+    .btn {
+        display: block;
+        border: 1px solid #a9a9a9;
+        border-radius: 5px;
+        width: 300px;
+        padding: 10px;
+    }
+}

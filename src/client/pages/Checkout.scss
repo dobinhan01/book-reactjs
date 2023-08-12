@@ -1,0 +1,187 @@
+.checkout-container {
+    .content {
+        display: flex;
+        padding: 25px 0 75px;
+
+        .left {
+            padding-right: 60px;
+
+            h2 {
+                font-size: 14px;
+                margin: 0 20px 20px 0;
+                padding-bottom: 8px;
+                border-bottom: 1px solid #eaeaea;
+                text-transform: uppercase;
+                letter-spacing: .6px;
+                font-weight: 600;
+                margin-right: 20px;
+                color: #121823;
+                line-height: 1.4;
+            }
+
+            form {
+                width: 100%;
+                margin: 48px 0 10px;
+
+                .form-group {
+                    display: inline-block;
+                    padding: 10px 20px 10px 0;
+                    background: none;
+                    border-radius: 0;
+                    outline: none;
+                    border: none;
+                    box-shadow: none;
+
+                    .form-label {
+                        color: #606775;
+                        font-weight: 400;
+                        display: block;
+                        font-size: 16px;
+                        float: none;
+                        line-height: 1.3;
+                        margin: 0 0 4px 0;
+                        padding: 0;
+
+                        span {
+                            font-weight: 400;
+                            color: #e42234;
+                        }
+                    }
+
+                    .form-control {
+                        height: 45px;
+                        width: 100%;
+                        line-height: 1.8;
+                        border-radius: 3px;
+                        color: #000;
+                        font-size: 16px;
+                        padding: 6px 12px;
+                        background-color: transparent;
+                        outline: none;
+                        border: 1px solid #d9dce1;
+                        box-shadow: none;
+                    }
+                }
+            }
+        }
+
+        .right {
+            h2 {
+                font-size: 14px;
+                position: relative;
+                margin: 0 0 20px;
+                padding-bottom: 8px;
+                border-bottom: 1px solid #eaeaea;
+                text-transform: uppercase;
+                letter-spacing: .6px;
+            }
+
+            .order {
+                padding: 20px;
+                background: #f0fbf7;
+
+                table {
+                    margin: 0 0 40px;
+                    border: none;
+                    width: 100%;
+                    border-collapse: separate;
+                    border-spacing: 0;
+
+                    thead {
+                        background-color: #606775;
+                        color: #fff;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+
+                        tr {
+                            th {
+                                font-size: 15px;
+                                letter-spacing: 1px;
+                                padding: 20px;
+                                font-weight: 600;
+                                color: #fff;
+                                text-transform: uppercase;
+                            }
+
+                            .total {
+                                text-align: right;
+                            }
+                        }
+                    }
+
+                    tbody {
+                        tr {
+                            font-style: italic;
+
+                            td {
+                                padding: 16px 20px;
+                                text-transform: capitalize;
+                            }
+
+                            .name {
+                                max-width: 376px;
+                                text-align: left;
+                            }
+
+                            .total {
+                                text-align: right;
+                            }
+                        }
+                    }
+
+                    tfoot {
+
+                        .subtotal,
+                        .total {
+                            th {
+                                font-weight: 600;
+                                color: #444;
+                                padding: 8px 20px;
+                                text-transform: capitalize;
+                            }
+
+                            td {
+                                color: #444;
+                                font-weight: 700;
+                                padding: 8px 20px;
+                                text-align: right;
+                                font-size: 18px;
+                            }
+                        }
+                    }
+                }
+
+                .place-order {
+                    .terms {
+                        margin-bottom: 20px;
+
+                        p {
+                            color: #606775;
+                            font-size: 18px;
+                            font-weight: 400;
+                            line-height: 25px;
+                            margin: 20px 0;
+                        }
+                    }
+
+                    .btn {
+                        width: 100%;
+                        font-size: 15px;
+                        line-height: 1.6;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        margin: 0;
+                        letter-spacing: .1em;
+                        background-color: #1d2530;
+                        color: #ffffff;
+                        padding: 16px 38px;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+        }
+    }
+}

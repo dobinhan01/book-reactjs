@@ -1,0 +1,102 @@
+.Header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: calc(100% - 16rem);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 8px 16px;
+    backdrop-filter: blur(6px);
+
+    .user {
+        display: flex;
+        align-items: center;
+
+        .text {
+            font-size: 18px;
+            font-weight: 500;
+            margin: 0 12px 0 0;
+
+            span {
+                font-weight: 600;
+            }
+        }
+
+        .icon-user {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+            }
+
+            &::after {
+                content: "";
+                width: calc(100% + 16px);
+                height: 10px;
+                background-color: transparent;
+                position: absolute;
+                top: 100%;
+                left: 0;
+            }
+
+            &:hover .user-wrap {
+                display: block;
+            }
+
+            .user-wrap {
+                position: absolute;
+                top: 100%;
+                right: -16px;
+                width: 180px;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: rgba(0, 0, 0, 0.18) 0px 6px 12px 0px;
+                cursor: default;
+                display: none;
+
+                ul {
+                    margin: 0;
+                    padding: 12px;
+                    border-radius: 10px;
+                    list-style: none;
+
+                    li {
+                        display: flex;
+                        align-items: center;
+                        padding: 0 12px;
+                        border-radius: 10px;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: rgb(241, 142, 125);
+                        }
+
+                        a {
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            color: #121823;
+                            text-decoration: none;
+
+                            i {
+                                width: 20px;
+                            }
+                        }
+
+                        p {
+                            margin: 0;
+                            padding: 10px 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

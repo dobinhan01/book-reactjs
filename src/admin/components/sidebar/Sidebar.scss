@@ -1,0 +1,140 @@
+.bars {
+    display: none;
+}
+
+.sidebar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 16rem;
+    height: 100vh;
+
+    .logo {
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 22px;
+
+        img {
+            height: 100%;
+        }
+
+        span {
+            padding-top: 10px;
+
+            span {
+                color: #FF919D;
+            }
+        }
+    }
+
+    .menu {
+        margin-top: 20px;
+
+        .item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            height: 40px;
+            position: relative;
+            transition: all 300ms ease;
+            border-radius: 0.7rem;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            color: unset;
+            margin: 0 0 12px 32px;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            &.active {
+                background: #f799a354;
+                margin-left: 0;
+                font-weight: 700;
+
+                &::before {
+                    content: "";
+                    width: 8px;
+                    height: 100%;
+                    background: #FF919D;
+                    margin-right: calc(1rem - 8px);
+                }
+            }
+
+            i {
+                font-size: 24px;
+            }
+        }
+    }
+
+    .logout {
+        position: absolute;
+        bottom: 2.3rem;
+        width: fit-content;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        height: 2.5rem;
+        margin-left: 2rem;
+        padding: 5px;
+        font-size: 24px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .sidebar-container {
+        .logo {
+            display: none;
+        }
+
+        .item>span {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar-container {
+        position: fixed;
+        z-index: 9;
+        background: #ffe0e0;
+        width: 60%;
+        padding-right: 1rem;
+        height: 100%;
+
+        .logo {
+            display: flex;
+        }
+
+        .item>span {
+            display: block;
+        }
+
+        .item:last-child {
+            position: relative;
+            margin-top: 6rem;
+        }
+    }
+
+
+    .bars {
+        display: flex;
+        position: fixed;
+        top: 2rem;
+        left: 60%;
+        background: #ffe0e0;
+        padding: 10px;
+        border-radius: 10px;
+        z-index: 9;
+    }
+
+    .close {
+        left: -60%;
+    }
+}

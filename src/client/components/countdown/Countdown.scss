@@ -1,0 +1,15 @@
+.countdown {
+    display: inline-block;
+    background-color: #F8F9FA00;
+    border: 1px solid #121823;
+    padding: 6px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: .5px;
+    border-radius: 5px;
+
+    span {
+        color: #ae6a5e;
+    }
+}
